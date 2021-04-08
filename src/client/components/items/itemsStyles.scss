@@ -1,5 +1,112 @@
+@import '@/lib/mixins.scss';
 .items {
-  .item {
-    color: red;
+  .items-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .items-content {
+      max-width: 980px;
+      width: 100%;
+      .items-categories {
+        list-style-type: none;
+        display: flex;
+        margin: 10px 0;
+        li {
+          display: flex;
+          align-items: center;
+          font-size: 0.875rem; // 14px
+          a {
+            text-decoration: none;
+            color: var(--text-primary);
+          }
+          .category-breadcrumb {
+            padding: 0 5px;
+          }
+        }
+        li:last-child {
+          font-weight: bold;
+        }
+        @include media(phone) {
+          display: none;
+        }
+        @include media(tablet) {
+          margin: 10px 16px;
+        }
+      }
+      .items-list {
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 4px;
+        padding: 0 16px;
+        @include media(tablet) {
+          margin: 0 16px;
+        }
+        @include media(phone) {
+          margin: 16px;
+        }
+        li.item-container {
+          display: flex;
+          flex-direction: column;
+          margin: 16px 0;
+          &:not(:first-child)::before {
+            height: 2px;
+            background-color: var(--bg);
+            width: 100%;
+            content: '';
+            margin: -16px 0 16px 0;
+          }
+          .item-content {
+            display: flex;
+            flex-wrap: wrap;
+            .item-photo {
+              width: 180px;
+              height: 180px;
+              border-radius: 4px;
+              background-color: var(--bg);
+              margin-right: 16px;
+              cursor: pointer;
+              @include media(phone) {
+                width: 120px;
+                height: 120px;
+              }
+            }
+            .item-data {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              color: var(--title);
+              .item-price {
+                font-size: 1.5rem; // 24px
+                margin-bottom: 32px;
+                @include media(phone) {
+                  margin-bottom: 10px;
+                }
+              }
+              .item-title {
+                font-size: 1.125rem;
+                max-width: 400px;
+                min-width: 170px;
+                cursor: pointer;
+                a {
+                  text-decoration: none;
+                }
+              }
+            }
+            .item-location {
+              font-size: 0.75rem; // 12px
+              width: 180px;
+              @include media(tablet) {
+                width: 120px;
+              }
+              color: var(--text-secondary);
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+      }
+    }
   }
 }

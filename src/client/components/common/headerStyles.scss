@@ -4,12 +4,17 @@ header {
   justify-content: center;
   padding: 10px;
   height: 38px;
+  .header-content {
+    max-width: 980px;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+  }
   .logoLink {
     margin-right: 20px;
   }
   .searchBox {
     display: flex;
-    max-width: 900px;
     flex: 1;
     color: var(--text-primary);
     input {
@@ -22,7 +27,7 @@ header {
         color: var(--text-secondary);
       }
       padding: 0 20px;
-      font-size: 1.125rem;
+      font-size: 1.125rem; // 18px
     }
     button {
       background-color: var(--bg);
@@ -32,6 +37,7 @@ header {
       justify-content: center;
       border-radius: 0 4px 4px 0;
       width: 38px;
+      cursor: pointer;
     }
   }
 }

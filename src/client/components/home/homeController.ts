@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import renderHtml from '@/client/components/common/renderHtml';
+import renderHtml from '@/lib/renderHtml';
 import homeView from './homeView';
 
 class Home {

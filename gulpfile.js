@@ -24,7 +24,7 @@ const buildServer = () => {
 
 const startServer = async () => {
   if (nodeprocess) nodeprocess.kill();
-  nodeprocess = await spawn("node", ["app"], {stdio: "inherit", cwd: "dist/"});
+  nodeprocess = spawn("node", ["app"], { stdio: "inherit", cwd: "dist/" });
   nodeprocess.on("close", function(code) {
       if(code === 8) {
           gulp.log("error", code)
