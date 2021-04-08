@@ -1,0 +1,37 @@
+header {
+  background-color: var(--main);
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  height: 38px;
+  .logoLink {
+    margin-right: 20px;
+  }
+  .searchBox {
+    display: flex;
+    max-width: 900px;
+    flex: 1;
+    color: var(--text-primary);
+    input {
+      flex: 1;
+      max-width: 890px; // 900px - 10px padding
+      border-radius: 4px 0 0 4px;
+      border: none;
+      outline: none;
+      &::placeholder {
+        color: var(--text-secondary);
+      }
+      padding: 0 20px;
+      font-size: 1.125rem;
+    }
+    button {
+      background-color: var(--bg);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0 4px 4px 0;
+      width: 38px;
+    }
+  }
+}
