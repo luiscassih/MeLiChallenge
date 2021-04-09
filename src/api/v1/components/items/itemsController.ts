@@ -18,9 +18,10 @@ class Items {
       const proxyQueryResult = await Axios.get("https://api.mercadolibre.com/sites/MLA/search?q=" + searchQuery);
       const queryData = proxyQueryResult.data;
       if (queryData) {
+        // Building item list
         const items: Item[] = []
         queryData.results.slice(0,4).forEach((resultItem: any) => {
-          // fixed to4 results for this challenge
+          // fixed to 4 results for this challenge
           items.push({
             id: resultItem.id,
             title: resultItem.title,
@@ -35,16 +36,19 @@ class Items {
             state_name: resultItem.address.state_name
           });
         });
-        const categories: string[] = [];
 
+        // Building categories
+        const categories: string[] = [];
         let resultCategories = queryData.filters.find((o: any) => o.id === "category");
         if (resultCategories) {
+          // categories will be "filters"
           const categoryValue: any = resultCategories.values && resultCategories.values[0];
           const categoryPath: string[] = categoryValue["path_from_root"];
           categoryPath.forEach((category: any ) => {
             categories.push(category.name);
           });
         } else {
+          // categories will be "available_filters instead"
           resultCategories = queryData.available_filters.find((o: any) => o.id === "category");
           if (resultCategories) {
             let resultCategoriesSorted = resultCategories.values.sort((a: any, b: any) => (a.results < b.results) ? 1 : -1);
@@ -55,6 +59,7 @@ class Items {
           }
         }
 
+        // Prepare data and send to consumer
         const result :ItemsProps = {
           author: author,
           items: items,
@@ -79,10 +84,12 @@ class Items {
       lastname: StringUtils.sanitizeString(req.body.author.lastname as string)
     };
     const requestedId: string = StringUtils.sanitizeString(req.params.id as string);
+
     try {
       let proxyQueryResult = await Axios.get("https://api.mercadolibre.com/items/" + requestedId);
       if (proxyQueryResult.data) {
         const queryData = proxyQueryResult.data;
+        // Building item
         const item: ItemDetail = {
           id: queryData.id,
           title: queryData.title,
@@ -98,11 +105,13 @@ class Items {
           description: "", 
         }
 
+        // Getting description
         proxyQueryResult = await Axios.get("https://api.mercadolibre.com/items/" + requestedId + "/description");
         if (proxyQueryResult.data) {
           item.description = proxyQueryResult.data.plain_text;
         }
 
+        // Getting categories
         const categories: string[] = [];
         proxyQueryResult = await Axios.get("https://api.mercadolibre.com/categories/" + queryData.category_id);
         if (proxyQueryResult.data) {
@@ -113,6 +122,7 @@ class Items {
           });
         }
 
+        // Prepare data and send to consumer
         const result :ItemsDetailProps = {
           author: author,
           item: item,

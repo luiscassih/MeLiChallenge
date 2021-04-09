@@ -2,6 +2,8 @@ import express from "express";
 import ItemsController from "./itemsController";
 
 const router = express.Router();
+
+// These routes will start with /items
 router.post("/", express.json(), ItemsController.getItemsByQuery);
 router.post("/:id", express.json(), ItemsController.getItemById);
 
