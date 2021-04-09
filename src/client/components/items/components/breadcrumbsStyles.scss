@@ -1,0 +1,28 @@
+@import '@/lib/mixins.scss';
+.breadcrumbs {
+  .breadcrumb-separator {
+    padding: 0 5px;
+  }
+  list-style-type: none;
+  display: flex;
+  margin: 10px 0;
+  li {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem; // 14px
+    a {
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+  }
+  li:last-child {
+    font-weight: bold;
+  }
+  @include media(phone) {
+    display: none;
+  }
+  @include media(tablet) {
+    margin: 10px 16px;
+  }
+}

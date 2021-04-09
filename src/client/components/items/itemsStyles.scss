@@ -7,32 +7,6 @@
     .items-content {
       max-width: 980px;
       width: 100%;
-      .items-categories {
-        list-style-type: none;
-        display: flex;
-        margin: 10px 0;
-        li {
-          display: flex;
-          align-items: center;
-          font-size: 0.875rem; // 14px
-          a {
-            text-decoration: none;
-            color: var(--text-primary);
-          }
-          .category-breadcrumb {
-            padding: 0 5px;
-          }
-        }
-        li:last-child {
-          font-weight: bold;
-        }
-        @include media(phone) {
-          display: none;
-        }
-        @include media(tablet) {
-          margin: 10px 16px;
-        }
-      }
       .items-list {
         list-style-type: none;
         display: flex;
@@ -104,6 +78,76 @@
               display: flex;
               align-items: center;
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+.items-detail {
+  .item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .item-content {
+      max-width: 980px;
+      width: 100%;
+      .item-data {
+        background-color: white;
+        border-radius: 4px;
+        display: flex;
+        padding: 32px;
+        .item-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          .item-photo {
+            cursor: pointer;
+            width: 680px;
+            min-height: 680px;
+          }
+          .item-description {
+            display: flex;
+            flex-direction: column;
+            span {
+              font-size: 1.75rem;
+              color: var(--title);
+              margin: 32px 0;
+            }
+            p {
+              font-size: 1rem;
+              color: var(--text-primary);
+            }
+          }
+        }
+        .item-panel {
+          max-width: 250px;
+          padding-left: 16px;
+          .item-stats {
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+          }
+          .item-title {
+            font-size: 1.5rem;
+            color: var(--title);
+            font-weight: bold;
+          }
+          .item-price {
+            font-size: 2.875rem; // 46px
+            color: var(--title);
+            margin: 32px 0;
+          }
+          .item-buy-button {
+            background-color: var(--button-primary);
+            color: white;
+            border-radius: 4px;
+            border: none;
+            outline: none;
+            width: 200px;
+            height: 40px;
+            cursor: pointer;
           }
         }
       }
