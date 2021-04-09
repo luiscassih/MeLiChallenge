@@ -13,7 +13,7 @@ export interface Item {
   price: {
     currency: string,
     amount: number,
-    decimals: number
+    decimals: string
   },
   picture: string,
   condition: string,
@@ -31,11 +31,29 @@ export interface ItemsProps {
   searchQuery: string
 }
 
-export interface ItemsDetailProps {
-  item: any,
-  categories: string[],
+export interface ItemDetail {
+  id: string,
+  title: string,
+  price: {
+    currency: string,
+    amount: number,
+    decimals: string
+  },
+  picture: string,
+  condition: string,
+  free_shipping: boolean,
+  sold_quantity: number,
+  description: string
 }
 
+export interface ItemsDetailProps {
+  author: {
+    name: string,
+    lastname: string
+  },
+  item: ItemDetail,
+  categories: string[],
+}
 export interface Breadcrumb {
   title: string,
   link: string

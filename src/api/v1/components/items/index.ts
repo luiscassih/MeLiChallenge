@@ -3,6 +3,7 @@ import ItemsController from "./itemsController";
 
 const router = express.Router();
 router.post("/", express.json(), ItemsController.getItemsByQuery);
+router.post("/:id", express.json(), ItemsController.getItemById);
 
 export interface Item {
   id: string,
@@ -10,7 +11,7 @@ export interface Item {
   price: {
     currency: string,
     amount: number,
-    decimals: number
+    decimals: string
   },
   picture: string,
   condition: string,
@@ -28,8 +29,27 @@ export interface ItemsProps {
   searchQuery: string
 }
 
+export interface ItemDetail {
+  id: string,
+  title: string,
+  price: {
+    currency: string,
+    amount: number,
+    decimals: string
+  },
+  picture: string,
+  condition: string,
+  free_shipping: boolean,
+  sold_quantity: number,
+  description: string
+}
+
 export interface ItemsDetailProps {
-  item: Item,
+  author: {
+    name: string,
+    lastname: string
+  },
+  item: ItemDetail,
   categories: string[],
 }
 

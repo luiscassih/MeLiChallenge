@@ -1,11 +1,10 @@
-import { Request, Response } from 'express';
+import { query, Request, Response } from 'express';
 import Axios from 'axios';
 import { StringUtils } from '@/lib/utils';
-import { Item, ItemsProps, ItemsDetailProps } from "./";
+import { Item, ItemsProps, ItemsDetailProps, ItemDetail } from "./";
 
 class Items {
   async getItemsByQuery(req: Request, res: Response) {
-
     const searchQuery = StringUtils.sanitizeString(req.query.search as string);
     const author = {
       name: StringUtils.sanitizeString(req.body.author.name as string),
@@ -24,7 +23,7 @@ class Items {
             price: {
               currency: resultItem.currency_id,
               amount: resultItem.price,
-              decimals: 0
+              decimals: "00"
             },
             picture: resultItem.thumbnail,
             condition: resultItem.condition,
@@ -61,6 +60,63 @@ class Items {
         res.status(200).send(result);
       }
     } catch(err) {
+      res.status(500).send(err.message);
+      throw new Error('Error retrieving data from MercadoLibre API: '+ err.message);
+    }
+  }
+
+  async getItemById(req: Request, res: Response) {
+    const author = {
+      name: StringUtils.sanitizeString(req.body.author.name as string),
+      lastname: StringUtils.sanitizeString(req.body.author.lastname as string)
+    };
+    const requestedId: string = StringUtils.sanitizeString(req.params.id as string);
+    try {
+      let proxyQueryResult = await Axios.get("https://api.mercadolibre.com/items/" + requestedId);
+      if (proxyQueryResult.data) {
+        const queryData = proxyQueryResult.data;
+        const item: ItemDetail = {
+          id: queryData.id,
+          title: queryData.title,
+          price: {
+            currency: queryData.currency_id,
+            amount: queryData.price,
+            decimals: "00"
+          },
+          picture: queryData.pictures[0].url,
+          condition: queryData.condition,
+          free_shipping: queryData.shipping.free_shipping,
+          sold_quantity: queryData.sold_quantity,
+          description: "", 
+        }
+
+        proxyQueryResult = await Axios.get("https://api.mercadolibre.com/items/" + requestedId + "/description");
+        if (proxyQueryResult.data) {
+          item.description = proxyQueryResult.data.plain_text;
+        }
+
+        const categories: string[] = [];
+        proxyQueryResult = await Axios.get("https://api.mercadolibre.com/categories/" + queryData.category_id);
+        if (proxyQueryResult.data) {
+          const categoryValue: any = proxyQueryResult.data;
+          const categoryPath: string[] = categoryValue["path_from_root"];
+          categoryPath.forEach((category: any ) => {
+            categories.push(category.name);
+          });
+        }
+
+        const result :ItemsDetailProps = {
+          author: author,
+          item: item,
+          categories: categories
+        }
+        res.status(200).send(result);
+      }
+    } catch(err) {
+      if (err.statusCode == 404) {
+        res.sendStatus(404);
+        return;
+      }
       res.status(500).send(err.message);
       throw new Error('Error retrieving data from MercadoLibre API: '+ err.message);
     }

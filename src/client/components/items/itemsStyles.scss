@@ -39,12 +39,12 @@
               width: 180px;
               height: 180px;
               border-radius: 4px;
-              background-color: var(--bg);
               margin-right: 16px;
               cursor: pointer;
               img {
                 width: 100%;
                 height: 100%;
+                object-fit: contain;
               }
               @include media(phone) {
                 width: 120px;
@@ -60,7 +60,11 @@
                 font-size: 1.5rem; // 24px
                 margin-bottom: 32px;
                 display: flex;
-                align-items: center;
+                span {
+                  display: flex;
+                  align-items: flex-start;
+                  font-size: 1.125rem;
+                }
                 @include media(phone) {
                   margin-bottom: 10px;
                 }
@@ -117,15 +121,20 @@
         .item-photo {
           cursor: pointer;
           width: 680px;
-          min-height: 680px;
+          height: 680px;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
           @include media(tablet) {
             align-self: center;
             width: 480px;
-            min-height: 480px;
+            height: 480px;
           }
           @include media(small-phone) {
             width: 280px;
-            min-height: 280px;
+            height: 280px;
           }
         }
         .item-description {
@@ -147,7 +156,7 @@
           }
         }
         .item-panel {
-          max-width: 200px;
+          max-width: 220px; // 300px -64px margin -16px padding
           padding-left: 16px;
           @include media(tablet) {
             margin-top: 32px;
@@ -166,6 +175,12 @@
             font-size: 2.875rem; // 46px
             color: var(--title);
             margin: 32px 0;
+            display: flex;
+            span {
+              display: flex;
+              align-items: flex-start;
+              font-size: 1.875rem;
+            }
           }
           .item-buy-button {
             background-color: var(--button-primary);

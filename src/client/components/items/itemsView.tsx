@@ -18,7 +18,7 @@ export default (props : ItemsProps) => {
             <div className="item-photo"><a href={"/items/" + i.id}><img src={i.picture} /></a></div>
             <div className="item-data">
               <div className="item-price">
-                <p>$ {i.price.amount}.{i.price.decimals}</p>
+                $ {i.price.amount}<span>{i.price.decimals}</span>
                 {i.free_shipping && <div className="item-freeshipping"><img title="Env&iacute;o gratis!" src={FreeShippingImg}/></div>}
               </div>
               <div className="item-title"><a href={"/items/" + i.id}>{i.title}</a></div>

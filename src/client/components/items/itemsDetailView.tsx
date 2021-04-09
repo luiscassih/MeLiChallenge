@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Breadcrumb, ItemsDetailProps } from '.';
+import { Breadcrumb, ItemsDetailProps, ItemDetail } from '.';
 import Header from "../common/header";
 import Breadcrumbs from './components/breadcrumbs';
 import "./itemsStyles.scss";
@@ -22,16 +22,16 @@ export default (props: ItemsDetailProps) => {
         <div className="item-content">
           <Breadcrumbs items={breadcrumbItems} />
           <div className="item-data">
-            <div className="item-photo"></div>
+            <div className="item-photo"><img src={resultItem.picture}/></div>
             <div className="item-panel">
-              <div className="item-stats">Nuevo - 234 vendidos</div>
-              <div className="item-title">Deco Reverse Sombrero Oxford</div>
-              <div className="item-price">$ 1.980</div>
+              <div className="item-stats">{resultItem.condition} - {resultItem.sold_quantity} vendidos</div>
+              <div className="item-title">{resultItem.title}</div>
+              <div className="item-price">$ {resultItem.price.amount}<span>{resultItem.price.decimals}</span></div>
               <button className="item-buy-button">Comprar</button>
             </div>
             <div className="item-description">
               <span>Descripci&oacute;n del producto</span>
-              <p>asdsadasdasdasd</p>
+              <p>{resultItem.description}</p>
             </div>
           </div>
         </div>
