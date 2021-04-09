@@ -6,6 +6,10 @@ import { Item, ItemsProps, ItemsDetailProps, ItemDetail } from "./";
 class Items {
   async getItemsByQuery(req: Request, res: Response) {
     const searchQuery = StringUtils.sanitizeString(req.query.search as string);
+    if (!req.body.author) {
+      res.sendStatus(400);
+      return;
+    }
     const author = {
       name: StringUtils.sanitizeString(req.body.author.name as string),
       lastname: StringUtils.sanitizeString(req.body.author.lastname as string)
@@ -48,7 +52,7 @@ class Items {
               resultCategoriesSorted = resultCategoriesSorted.slice(0,3);
             }
             resultCategoriesSorted.forEach((cat: any) => categories.push(cat.name));
-          } else {console.log("no category found");}
+          }
         }
 
         const result :ItemsProps = {
@@ -60,6 +64,10 @@ class Items {
         res.status(200).send(result);
       }
     } catch(err) {
+      if (err.response.status == 404) {
+        res.sendStatus(404);
+        return;
+      }
       res.status(500).send(err.message);
       throw new Error('Error retrieving data from MercadoLibre API: '+ err.message);
     }
@@ -113,7 +121,7 @@ class Items {
         res.status(200).send(result);
       }
     } catch(err) {
-      if (err.statusCode == 404) {
+      if (err.response.status == 404) {
         res.sendStatus(404);
         return;
       }

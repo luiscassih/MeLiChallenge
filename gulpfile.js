@@ -1,12 +1,12 @@
 const gulp = require("gulp");
-const ts = require("gulp-typescript");
 const webpack = require("webpack");
 const gulpWebpack = require("webpack-stream");
 const spawn = require("child_process").spawn;
+const del = require("del");
 
 var nodeprocess;
 
-var tsp = ts.createProject("tsconfig.json");
+const clean = () => del("dist/**", {force: true});
 
 const buildClient = () => {
   gulp.src("src/client/public/*").pipe(gulp.dest("dist/public"));
@@ -17,7 +17,7 @@ const buildClient = () => {
 }
 
 const buildServer = () => {
-  return gulp.src("src/app.ts")
+  return gulp.src("src/main.ts")
     .pipe(gulpWebpack(require("./webpack.server.config"), webpack))
     .pipe(gulp.dest("dist"));
 }
@@ -31,11 +31,13 @@ const startServer = async () => {
       }
   });
 }
+
 const watch = () => {
   // gulp.watch("src/app.ts", gulp.series(buildServer, startServer));
   gulp.watch("src", { ignored: "src/app.ts"}, gulp.series(buildServer, buildClient, startServer));
 }
 
 exports.dev = gulp.series(buildServer, buildClient, startServer, watch);
-exports.build = gulp.series(buildServer, buildClient);
-exports.watch = gulp.watch
+exports.build = gulp.series(clean, buildServer, buildClient);
+exports.watch = watch
+exports.start = gulp.series(clean, buildServer, buildClient, startServer);

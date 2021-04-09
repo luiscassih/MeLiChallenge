@@ -9,7 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     publicPath: "/"
   },
-  devtool: "source-map",
+  devtool: process.env.NODE_ENV !== "production" && "source-map",
   // target: 'node',
   node: {
     __dirname: false

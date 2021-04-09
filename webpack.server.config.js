@@ -2,13 +2,13 @@ const path = require("path");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     entry: {
-        app: "./src/app.ts",
+        app: "./src/main.ts",
     },
     output: {
         filename: "[name].js",
         path: path.resolve(__dirname,"dist"),
     },
-    devtool: "source-map",
+    devtool: process.env.NODE_ENV !== "production" && "source-map",
     target: 'node',
     node: {
         __dirname: false

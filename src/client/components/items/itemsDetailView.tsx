@@ -24,7 +24,7 @@ export default (props: ItemsDetailProps) => {
           <div className="item-data">
             <div className="item-photo"><img src={resultItem.picture}/></div>
             <div className="item-panel">
-              <div className="item-stats">{resultItem.condition} - {resultItem.sold_quantity} vendidos</div>
+              <div className="item-stats">{resultItem.condition === 'new' ? 'Nuevo' : 'Usado'} - {resultItem.sold_quantity} vendidos</div>
               <div className="item-title">{resultItem.title}</div>
               <div className="item-price">$ {resultItem.price.amount}<span>{resultItem.price.decimals}</span></div>
               <button className="item-buy-button">Comprar</button>
