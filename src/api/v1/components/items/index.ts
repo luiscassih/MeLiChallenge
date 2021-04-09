@@ -11,7 +11,7 @@ export interface Item {
   price: {
     currency: string,
     amount: number,
-    decimals: string
+    decimals: number
   },
   picture: string,
   condition: string,
@@ -35,7 +35,7 @@ export interface ItemDetail {
   price: {
     currency: string,
     amount: number,
-    decimals: string
+    decimals: number
   },
   picture: string,
   condition: string,

@@ -5,6 +5,8 @@ Challenge excercise for Mercado Libre
 
 `Edit .env config and replace with your custom config.`
 
+First `yarn install` to install dependencies.
+
 To start in dev mode:
 ```
 yarn dev

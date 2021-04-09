@@ -26,8 +26,8 @@ class Items {
             title: resultItem.title,
             price: {
               currency: resultItem.currency_id,
-              amount: resultItem.price,
-              decimals: "00"
+              amount: Math.trunc(resultItem.price),
+              decimals: ((resultItem.price % 1) as any).toFixed(2) * 100
             },
             picture: resultItem.thumbnail,
             condition: resultItem.condition,
@@ -88,8 +88,8 @@ class Items {
           title: queryData.title,
           price: {
             currency: queryData.currency_id,
-            amount: queryData.price,
-            decimals: "00"
+            amount: Math.trunc(queryData.price),
+            decimals: ((queryData.price % 1) as any).toFixed(2) * 100
           },
           picture: queryData.pictures[0].url,
           condition: queryData.condition,

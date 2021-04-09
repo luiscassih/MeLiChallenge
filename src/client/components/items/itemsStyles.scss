@@ -60,6 +60,7 @@
                 font-size: 1.5rem; // 24px
                 margin-bottom: 32px;
                 display: flex;
+                flex-wrap: wrap;
                 span {
                   display: flex;
                   align-items: flex-start;
@@ -176,6 +177,7 @@
             color: var(--title);
             margin: 32px 0;
             display: flex;
+            flex-wrap: wrap;
             span {
               display: flex;
               align-items: flex-start;

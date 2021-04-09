@@ -4,6 +4,7 @@ import Header from "../common/header";
 import Breadcrumbs from "./components/breadcrumbs";
 import FreeShippingImg from "@/client/assets/icons/free_shipping_36x36.png";
 import "./itemsStyles.scss";
+import { StringUtils } from '@/lib/utils';
 
 export default (props : ItemsProps) => {
   const [resultItems, setResultItems] = useState(props.items);
@@ -18,7 +19,7 @@ export default (props : ItemsProps) => {
             <div className="item-photo"><a href={"/items/" + i.id}><img src={i.picture} /></a></div>
             <div className="item-data">
               <div className="item-price">
-                $ {i.price.amount}<span>{i.price.decimals}</span>
+                $ {i.price.amount}<span>{StringUtils.parsePriceDecimals(i.price.decimals)}</span>
                 {i.free_shipping && <div className="item-freeshipping"><img title="Env&iacute;o gratis!" src={FreeShippingImg}/></div>}
               </div>
               <div className="item-title"><a href={"/items/" + i.id}>{i.title}</a></div>
