@@ -4,13 +4,17 @@ import cors from 'cors';
 import api from './api';
 import client from './client/components/router';
 import dotenv from 'dotenv';
+import Axios from 'axios';
+
 
 const app = express();
 const server = http.createServer(app);
 dotenv.config({ path: __dirname + "/.env" });
+const defaultBaseUrl = process.env.APP_URL || "http://localhost:8080";
 
+Axios.defaults.baseURL = defaultBaseUrl;
 app.use(cors({
-  origin: process.env.APP_URL || 'http://localhost:8080',
+  origin: defaultBaseUrl,
   optionsSuccessStatus: 200
 }));
 

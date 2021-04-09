@@ -22,18 +22,16 @@ export default (props: ItemsDetailProps) => {
         <div className="item-content">
           <Breadcrumbs items={breadcrumbItems} />
           <div className="item-data">
-            <div className="item-info">
-              <div className="item-photo"></div>
-              <div className="item-description">
-                <span>Descripci&oacute;n del producto</span>
-                <p>asdsadasdasdasd</p>
-              </div>
-            </div>
+            <div className="item-photo"></div>
             <div className="item-panel">
               <div className="item-stats">Nuevo - 234 vendidos</div>
               <div className="item-title">Deco Reverse Sombrero Oxford</div>
               <div className="item-price">$ 1.980</div>
               <button className="item-buy-button">Comprar</button>
+            </div>
+            <div className="item-description">
+              <span>Descripci&oacute;n del producto</span>
+              <p>asdsadasdasdasd</p>
             </div>
           </div>
         </div>

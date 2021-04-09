@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Breadcrumb, ItemsProps } from '.';
 import Header from "../common/header";
-import "./itemsStyles.scss";
 import Breadcrumbs from "./components/breadcrumbs";
+import FreeShippingImg from "@/client/assets/icons/free_shipping_36x36.png";
+import "./itemsStyles.scss";
 
 export default (props : ItemsProps) => {
   const [resultItems, setResultItems] = useState(props.items);
@@ -14,15 +15,15 @@ export default (props : ItemsProps) => {
       items.push(
         <li className="item-container" key={index}>
           <div className="item-content">
-            <div className="item-photo"><a href="/items/15"></a></div>
+            <div className="item-photo"><a href={"/items/" + i.id}><img src={i.picture} /></a></div>
             <div className="item-data">
               <div className="item-price">
-                <p>$ 1.980</p>
-                <div className="item-shipping"></div>
+                <p>$ {i.price.amount}.{i.price.decimals}</p>
+                {i.free_shipping && <div className="item-freeshipping"><img title="Env&iacute;o gratis!" src={FreeShippingImg}/></div>}
               </div>
-              <div className="item-title"><a href="/items/15">Apple Ipod Touch 5g 16gb Negro Igual A Nuevo Completo Unico!</a></div>
+              <div className="item-title"><a href={"/items/" + i.id}>{i.title}</a></div>
             </div>
-            <div className="item-location">Capital Federal</div>
+            <div className="item-location">{i.state_name}</div>
           </div>
         </li>
       );
